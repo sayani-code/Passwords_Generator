@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 
 class PasswordGeneratorApp:
-    """A desktop interface for generating passwords from selected character sets."""
+    
 
     GREEN = "#2e9d52"
     RED = "#d94b4b"
@@ -200,7 +200,7 @@ class PasswordGeneratorApp:
         ).pack()
 
     def selected_characters(self):
-        """Return all character groups currently set to Yes."""
+        #Return all character groups currently set to Yes.
         return [
             characters
             for (_label, characters), selected in zip(
@@ -211,30 +211,30 @@ class PasswordGeneratorApp:
         ]
 
     def remove_placeholder(self, _event=None):
-        """Clear the hint text when the user clicks the length entry."""
+        
         if self.length_var.get() == self.PLACEHOLDER:
             self.length_var.set("")
             self.length_entry.configure(fg="black")
 
     def restore_placeholder(self, _event=None):
-        """Restore the hint if the length entry is empty."""
+        
         if not self.length_var.get().strip():
             self.length_var.set(self.PLACEHOLDER)
             self.length_entry.configure(fg="gray")
 
     def clear_length_entry(self):
-        """Reset the password length entry to its placeholder."""
+        
         self.length_var.set(self.PLACEHOLDER)
         self.length_entry.configure(fg="gray")
 
     def length_changed(self, _event=None):
-        """Require Accept again if the user changes the password length."""
+        
         self.accepted_length = None
         self.accepted_sets = None
         self.status_var.set("Length changed. Click Accept to save it.")
 
     def set_choice(self, index, value):
-        """Set a Yes/No option and update its pressed button appearance."""
+        #Set a Yes/No option 
         self.choice_vars[index].set(value)
 
         yes_button, no_button = self.option_buttons[index]
@@ -252,7 +252,7 @@ class PasswordGeneratorApp:
         self.status_var.set("Choices changed. Click Accept to save them.")
 
     def get_length(self):
-        """Validate and return the entered password length."""
+        
         entry_value = self.length_var.get().strip()
 
         if not entry_value or entry_value == self.PLACEHOLDER:
@@ -281,7 +281,7 @@ class PasswordGeneratorApp:
         return length
 
     def accept_choices(self):
-        """Save the selected choices, then clear the length entry."""
+        
         length = self.get_length()
 
         if length is None:
@@ -299,14 +299,13 @@ class PasswordGeneratorApp:
         self.accepted_length = length
         self.accepted_sets = character_sets
 
-        # Show the placeholder again after saving the settings.
-        self.clear_length_entry()
+        
         self.status_var.set(
             "Choices accepted. Click Generate Password."
         )
 
     def generate_password(self):
-        """Generate a password from the accepted settings."""
+        
         if self.accepted_length is None or self.accepted_sets is None:
             messagebox.showinfo(
                 "Accept choices",
