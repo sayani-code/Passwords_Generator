@@ -3,40 +3,60 @@ import string
 
 print("===== Password Generator =====")
 
-# Ask for password length
-length = int(input("Enter password length(minimum 4): "))
+# Number of passwords
+count = int(input("How many passwords do you want to generate? "))
 
-# Ask what to include
-lower = input("Include lowercase letters? (yes/no): ").lower()
-upper = input("Include uppercase letters? (yes/no): ").lower()
-numbers = input("Include numbers? (yes/no): ").lower()
-symbols = input("Include symbols? (yes/no): ").lower()
+# Password length
+while True:
+    length = int(input("Enter password length: "))
+    if length >= 4:
+        break
+    print("Password length must be at least 4!")
 
-# Create an empty string to store all allowed characters
-characters = ""
+# User choices
+while True :
+    lower = input("Include lowercase? (yes/no): ").lower()
+    upper = input("Include uppercase? (yes/no): ").lower()
+    numbers = input("Include numbers? (yes/no): ").lower()
+    symbols = input("Include symbols? (yes/no): ").lower()
+    
+    # Error if nothing is selected
+    if lower in ("n","no") and upper in ("n","no") and numbers in ("n","no") and symbols in ("n","no"):
+        print("Error! Select at least one character type.")
+    if any(choice not in ("y", "yes", "n", "no")
+       for choice in (lower, upper, numbers, symbols)):
+        print("Invalid input! Please enter only y, yes, n or no.")
+    else:
+        break
 
-# Add character groups based on user choice
+all_characters = ""
+required = []
+
 if lower in ("y","yes"):
-    characters += string.ascii_lowercase
+    all_characters += string.ascii_lowercase
+    required.append(random.choice(string.ascii_lowercase))
 
 if upper in ("y","yes"):
-    characters += string.ascii_uppercase
+    all_characters += string.ascii_uppercase
+    required.append(random.choice(string.ascii_uppercase))
 
 if numbers in ("y","yes"):
-    characters += string.digits
+    all_characters += string.digits
+    required.append(random.choice(string.digits))
 
 if symbols in ("y","yes"):
-    characters += string.punctuation
+    all_characters += string.punctuation
+    required.append(random.choice(string.punctuation))
 
-# Check if at least one option was selected
-if characters == "":
-    print("Error: You must choose at least one character type.")
-else:
-    password = ""
+print("\nGenerated Passwords:\n")
 
-    # Generate password
-    for i in range(length):
-        password += random.choice(characters)
+for i in range(count):
+    password = required.copy()
 
-    print("\nGenerated Password:")
-    print(password)
+    while len(password) < length:
+        password.append(random.choice(all_characters))
+
+    random.shuffle(password)
+
+    print(f"Password {i+1}: {''.join(password)}")
+
