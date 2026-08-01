@@ -4,8 +4,7 @@ import secrets
 import string
 
 
-def generate_passwords(count, length, lower, upper, numbers, symbols):
-    """Generate one or more random passwords."""
+def generate_passwords(count, length, lower, upper, numbers, symbols):#Generate one or more random passwords.
 
     character_sets = []
 
@@ -39,7 +38,7 @@ def generate_passwords(count, length, lower, upper, numbers, symbols):
             for character_set in character_sets
         ]
 
-        # Fill remaining characters
+        
         while len(password) < length:
             password.append(secrets.choice(all_characters))
 
@@ -51,8 +50,7 @@ def generate_passwords(count, length, lower, upper, numbers, symbols):
     return passwords
 
 
-def check_password_strength(password):
-    """Check the strength of a password."""
+def check_password_strength(password):  #Check the strength of a password.
 
     has_lower = any(char.islower() for char in password)
     has_upper = any(char.isupper() for char in password)

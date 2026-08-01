@@ -10,32 +10,23 @@ class PasswordGeneratorApp:
 
         self.root = root
 
-        # -----------------------------
-        # Window settings
-        # -----------------------------
-
+        # Window design
+        
         self.root.title("Password Generator Application")
         self.root.geometry("650x650")
         self.root.resizable(False, False)
 
-        self.root.configure(bg="#f2f2f2")
+        self.root.configure(bg="#dccaca")
 
         # Store generated password
         self.generated_password = ""
-
-        # -----------------------------
-        # Tkinter variables
-        # -----------------------------
 
         self.upper_var = tk.StringVar(value="yes")
         self.lower_var = tk.StringVar(value="yes")
         self.number_var = tk.StringVar(value="yes")
         self.symbol_var = tk.StringVar(value="yes")
 
-        # -----------------------------
         # Title
-        # -----------------------------
-
         title_label = tk.Label(
             root,
             text="Password Generator Application",
@@ -45,21 +36,15 @@ class PasswordGeneratorApp:
 
         title_label.pack(pady=25)
 
-        # -----------------------------
         # Main frame
-        # -----------------------------
-
         main_frame = tk.Frame(
             root,
-            bg="#f2f2f2"
+            bg="#dccaca"
         )
 
         main_frame.pack(pady=10)
 
-        # -----------------------------
         # Password Length
-        # -----------------------------
-
         length_label = tk.Label(
             main_frame,
             text="Password Length",
@@ -89,10 +74,7 @@ class PasswordGeneratorApp:
             pady=12
         )
 
-        # -----------------------------
         # Uppercase
-        # -----------------------------
-
         uppercase_label = tk.Label(
             main_frame,
             text="Include Uppercase Letters",
@@ -114,10 +96,7 @@ class PasswordGeneratorApp:
             row=1
         )
 
-        # -----------------------------
         # Lowercase
-        # -----------------------------
-
         lowercase_label = tk.Label(
             main_frame,
             text="Include Lowercase Letters",
@@ -139,10 +118,7 @@ class PasswordGeneratorApp:
             row=2
         )
 
-        # -----------------------------
         # Numbers
-        # -----------------------------
-
         numbers_label = tk.Label(
             main_frame,
             text="Include Numbers",
@@ -164,10 +140,7 @@ class PasswordGeneratorApp:
             row=3
         )
 
-        # -----------------------------
-        # Symbols
-        # -----------------------------
-
+        # Symbols 
         symbols_label = tk.Label(
             main_frame,
             text="Include Special Symbols",
@@ -188,11 +161,7 @@ class PasswordGeneratorApp:
             self.symbol_var,
             row=4
         )
-
-        # -----------------------------
         # Generate Button
-        # -----------------------------
-
         generate_button = tk.Button(
             root,
             text="GENERATE PASSWORD",
@@ -205,10 +174,7 @@ class PasswordGeneratorApp:
 
         generate_button.pack(pady=25)
 
-        # -----------------------------
         # Password output
-        # -----------------------------
-
         self.password_entry = tk.Entry(
             root,
             font=("Consolas", 15),
@@ -219,23 +185,17 @@ class PasswordGeneratorApp:
 
         self.password_entry.pack(pady=10)
 
-        # -----------------------------
         # Strength Label
-        # -----------------------------
-
         self.strength_label = tk.Label(
             root,
             text="",
             font=("Arial", 12, "bold"),
-            bg="#f2f2f2"
+            bg="#d7baba"
         )
 
         self.strength_label.pack(pady=5)
 
-        # -----------------------------
         # Accept Button
-        # -----------------------------
-
         accept_button = tk.Button(
             root,
             text="ACCEPT",
@@ -248,15 +208,12 @@ class PasswordGeneratorApp:
 
         accept_button.pack(pady=10)
 
-        # -----------------------------
         # Reset Button
-        # -----------------------------
-
         reset_button = tk.Button(
             root,
             text="RESET",
             font=("Arial", 12, "bold"),
-            bg="#F44336",
+            bg="#DC2D56",
             fg="white",
             width=12,
             command=self.reset_form
@@ -264,10 +221,7 @@ class PasswordGeneratorApp:
 
         reset_button.pack(pady=5)
 
-    # =====================================================
     # Create Yes / No buttons
-    # =====================================================
-
     def create_yes_no_buttons(self, parent, variable, row):
 
         yes_button = tk.Radiobutton(
@@ -299,7 +253,7 @@ class PasswordGeneratorApp:
             width=7,
             bg="#F44336",
             fg="white",
-            selectcolor="#C62828",
+            selectcolor="#C63D2E",
             font=("Arial", 10, "bold")
         )
 
@@ -310,10 +264,7 @@ class PasswordGeneratorApp:
             pady=5
         )
 
-    # =====================================================
     # Generate Password
-    # =====================================================
-
     def generate_password(self):
 
         try:
@@ -356,7 +307,6 @@ class PasswordGeneratorApp:
                 )
                 return
 
-            # We only need one password for this GUI
             passwords = generate_passwords(
                 count=1,
                 length=length,
@@ -401,9 +351,7 @@ class PasswordGeneratorApp:
                 str(error)
             )
 
-    # =====================================================
     # Show Password Strength
-    # =====================================================
 
     def show_strength(self, strength):
 
@@ -411,27 +359,24 @@ class PasswordGeneratorApp:
 
             self.strength_label.config(
                 text="Strength: Strong",
-                fg="green"
+                fg="#116E14"
             )
 
         elif strength == "Medium":
 
             self.strength_label.config(
                 text="Strength: Medium",
-                fg="orange"
+                fg="#14288c"
             )
 
         else:
 
             self.strength_label.config(
                 text="Strength: Weak",
-                fg="red"
+                fg="#eb0c17"
             )
 
-    # =====================================================
     # Accept Password
-    # =====================================================
-
     def accept_password(self):
 
         if not self.generated_password:
@@ -457,10 +402,7 @@ class PasswordGeneratorApp:
             "Password copied to clipboard!"
         )
 
-    # =====================================================
     # Reset
-    # =====================================================
-
     def reset_form(self):
 
         # Clear length
